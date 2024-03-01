@@ -1,0 +1,7 @@
+{
+  "name": "instasample",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
