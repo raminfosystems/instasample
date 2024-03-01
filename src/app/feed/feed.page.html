@@ -12,6 +12,12 @@
     <ion-item>
       {{ post.title }}
     </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <img [src]="post.image" />
+      </ion-thumbnail>
+      {{ post.description }}
+    </ion-item>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">

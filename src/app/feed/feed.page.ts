@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { AlertController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-feed',
@@ -14,11 +15,12 @@ export class FeedPage implements OnInit {
   
   posts: { title: string, description: string, image: string }[] = [];
 
-  constructor() { }
+  constructor(private alertController : AlertController) { }
 
   ngOnInit() {
     // Call to load initial posts
     this.loadPosts();
+    this.displayPopupIfNotLoggedIn();
   }
 
   loadPosts() {
@@ -51,11 +53,51 @@ export class FeedPage implements OnInit {
       // and disable the infinite scroll
       if (this.posts.length >= 50) {
         event.target.disabled = true;
+        this.displayPopupIfNotLoggedIn();
       }
     }, 500);
 
   }
 
+  async displayPopupIfNotLoggedIn() {
+    // Simulating user not being logged in after 10 seconds
+    setTimeout(async () => {
+      const alert = await this.alertController.create({
+        header: 'Login Required',
+        message: 'Please log in to continue.',
+        buttons: ['OK']
+      });
+  
+      await alert.present();
+    }, 5000); // Adjust the time as needed (e.g., 10000 milliseconds for 10 seconds)
+  }
+  
 
+  // check every 5 seconds if the user is logged in
+  // if not, display the popup
+  // this is just a mock implementation
+  // replace with actual implementation
+  checkIfLoggedIn() {
+    setInterval(() => {
+      this.displayPopupIfNotLoggedIn();
+    }, 5000);
+  }
+
+  // when user scroll on the page, check if the user is logged in 
+  // if not, display the popup
+  // this is just a mock implementation 
+  // replace with actual implementation
+  onScroll(event: any) {
+    this.checkIfLoggedIn();
+  }
+
+  // when user click on the page, check if the user is logged in
+  // if not, display the popup
+  // this is just a mock implementation
+  // replace with actual implementation
+  onClick(event: any) {
+    console.log('click event', event);
+    this.checkIfLoggedIn();
+  }
 
 }
