@@ -10,4 +10,8 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'feed',
+    loadComponent: () => import('./feed/feed.page').then( m => m.FeedPage)
+  },
 ];
