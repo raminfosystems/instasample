@@ -51,9 +51,9 @@ export class FeedPage implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.posts.length >= 50) {
+      if (this.posts.length >= 20) {
         event.target.disabled = true;
-        this.displayPopupIfNotLoggedIn();
+        this.checkIfLoggedIn();
       }
     }, 500);
 
@@ -75,29 +75,12 @@ export class FeedPage implements OnInit {
 
   // check every 5 seconds if the user is logged in
   // if not, display the popup
-  // this is just a mock implementation
-  // replace with actual implementation
+
   checkIfLoggedIn() {
     setInterval(() => {
       this.displayPopupIfNotLoggedIn();
     }, 5000);
   }
 
-  // when user scroll on the page, check if the user is logged in 
-  // if not, display the popup
-  // this is just a mock implementation 
-  // replace with actual implementation
-  onScroll(event: any) {
-    this.checkIfLoggedIn();
-  }
-
-  // when user click on the page, check if the user is logged in
-  // if not, display the popup
-  // this is just a mock implementation
-  // replace with actual implementation
-  onClick(event: any) {
-    console.log('click event', event);
-    this.checkIfLoggedIn();
-  }
 
 }
